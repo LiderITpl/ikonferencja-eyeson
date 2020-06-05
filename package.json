@@ -4,11 +4,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@rmwc/button": "^6.0.14",
     "@rmwc/grid": "^6.0.14",
     "@rmwc/icon-button": "^6.0.14",
     "@rmwc/linear-progress": "^6.0.14",
     "@rmwc/textfield": "^6.1.0",
     "@rmwc/theme": "^6.1.0",
+    "@rmwc/toolbar": "^5.7.2",
     "axios": "^0.19.2",
     "eyeson": "^1.5.0",
     "gh-pages": "^2.0.1",

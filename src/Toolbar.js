@@ -1,34 +1,26 @@
 import React from 'react';
-import logo from './logo.png';
+import logo from './logo.jpg';
 import {Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle} from '@rmwc/toolbar';
-import {Button} from '@rmwc/button';
 import './Toolbar.css';
 
-export default ({title}) => (
+export default ({title, userName, roomName}) => (
   <Toolbar>
     <ToolbarRow>
       <ToolbarSection alignStart>
-        <img src={logo} alt="eyeson Logo" className="Toolbar-logo" />
+        <img src={logo} alt="eyeson Logo" className="Toolbar-logo" height={50} />
         <ToolbarTitle>{title}</ToolbarTitle>
       </ToolbarSection>
-      <ToolbarSection alignEnd>
-        <Button
-          tag="a"
-          target="_blank"
-          rel="noopener"
-          href="https://twitter.com/eyeson_team"
-          unelevated>
-          Twitter
-        </Button>
-        <Button
-          tag="a"
-          target="_blank"
-          rel="noopener"
-          href="https://github.com/eyeson-team"
-          unelevated>
-          GitHub
-        </Button>
-      </ToolbarSection>
+      {(userName && roomName)
+      && (
+          <ToolbarSection alignEnd>
+            <div className={'ToolbarButton'}>
+              {userName}
+            </div>
+            <div className={'ToolbarButton'}>
+              {roomName}
+            </div>
+          </ToolbarSection>
+      )}
     </ToolbarRow>
   </Toolbar>
 );

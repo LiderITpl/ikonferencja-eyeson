@@ -150,8 +150,12 @@ class App extends Component {
 
   render() {
     return (
-      <ThemeProvider options={{primary: '#9e206c', secondary: '#6d6d6d'}}>
-        <Toolbar title="Web GUI React App" />
+      <ThemeProvider options={{primary: '#dc0000', secondary: '#6d6d6d'}}>
+        <Toolbar
+          title="iKonferencja | Zjazd Klubów Gazety Polskiej ONLINE"
+          userName={this.state.extra.userName}
+          roomName={this.state.extra.roomName}
+        />
         <Grid className="App">
           <GridCell span="12">
             {this.state.connecting && <LinearProgress />}
@@ -160,7 +164,7 @@ class App extends Component {
             {!this.state.stream && (
               <Fragment>
                 <TextField
-                  label="Meeting Access Key"
+                  label="Klucz dostępu"
                   onChange={this.onTokenFieldChange}
                   value={this.state.token}
                   disabled={this.state.connecting}
@@ -179,19 +183,19 @@ class App extends Component {
                 <IconButton
                   checked={this.state.audio}
                   onClick={this.toggleAudio}
-                  label="Toggle audio"
+                  label="Przełącz audio"
                   icon={this.state.audio ? 'mic' : 'mic_off'}
                 />
                 <IconButton
                   checked={this.state.video}
                   onClick={this.toggleVideo}
-                  label="Toggle video"
+                  label="Przełącz wideo"
                   icon={this.state.video ? 'videocam' : 'videocam_off'}
                 />
                 <IconButton
                   checked={this.state.screen}
                   onClick={this.toggleScreen}
-                  label="Share screen"
+                  label="Udostępniaj ekran"
                   icon={this.state.video ? 'screen_share' : 'stop_screen_share'}
                 />
               </Fragment>

@@ -1294,6 +1294,21 @@
     "@material/theme" "^3.1.0"
     "@material/typography" "^3.1.0"
 
+"@material/button@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@material/button/-/button-5.1.0.tgz#22986368ce12faad142ba01c4aeb42f6a380dffb"
+  integrity sha512-umeuIEbeRRd0cY+5axhrBoM0dvJ4YfoTsUbKgz4ctFxHLBsgthFUIXSa3Ot15s284UP6kjslK0LCMqzhirZxeQ==
+  dependencies:
+    "@material/density" "^5.1.0"
+    "@material/elevation" "^5.1.0"
+    "@material/feature-targeting" "^5.1.0"
+    "@material/ripple" "^5.1.0"
+    "@material/rtl" "^5.1.0"
+    "@material/shape" "^5.1.0"
+    "@material/theme" "^5.1.0"
+    "@material/touch-target" "^5.1.0"
+    "@material/typography" "^5.1.0"
+
 "@material/card@^3.1.0", "@material/card@^3.2.0":
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/@material/card/-/card-3.2.0.tgz#b051298ec6d498617b1927022dceb9a331ca3c39"
@@ -1433,6 +1448,16 @@
     "@material/animation" "^3.1.0"
     "@material/feature-targeting" "^3.1.0"
     "@material/theme" "^3.1.0"
+
+"@material/elevation@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@material/elevation/-/elevation-5.1.0.tgz#569065f858dd1dfb83d3ba4951ed6e449da1d545"
+  integrity sha512-NsWIT+L6x3BLouCOh3H8x885/nCrNNmzCwHEodz/0PcYQsxx9RiIVFkagmJWw/w//jej/D4NotD0xHGKOWTrFA==
+  dependencies:
+    "@material/animation" "^5.1.0"
+    "@material/base" "^5.1.0"
+    "@material/feature-targeting" "^5.1.0"
+    "@material/theme" "^5.1.0"
 
 "@material/fab@^3.1.0", "@material/fab@^3.2.0":
   version "3.2.0"
@@ -1969,6 +1994,14 @@
     "@material/typography" "^3.1.0"
     tslib "^1.9.3"
 
+"@material/touch-target@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@material/touch-target/-/touch-target-5.1.0.tgz#0e03ba901acf118c91eb4cfa02034964424565a2"
+  integrity sha512-lR3eoL1D0I/hyEK6I7bMFDBy/pE0yYvjYUZtL1vC7+2i54A4FgQ2hwnpQJVaZQXzrHdj6xsXmODphmUsH5gqPA==
+  dependencies:
+    "@material/base" "^5.1.0"
+    "@material/feature-targeting" "^5.1.0"
+
 "@material/typography@^2.3.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@material/typography/-/typography-2.3.0.tgz#fe2180c697172227f0745cda684ecafdaba3f8dd"
@@ -2049,6 +2082,18 @@
     "@rmwc/provider" "^5.7.2"
     "@rmwc/ripple" "^5.7.2"
     "@rmwc/types" "^5.6.0"
+
+"@rmwc/button@^6.0.14":
+  version "6.0.14"
+  resolved "https://registry.yarnpkg.com/@rmwc/button/-/button-6.0.14.tgz#ce502e87abae8a57582c3b9a0f97bbd16d4bfa60"
+  integrity sha512-suejaZsM60NxSwLA0CROLiEzDMxAFiahhxJEmzwpLK3Wpe3i99X+nPPvlrZ1BjhoYktTZq6rAS8SFCbIQgiiCw==
+  dependencies:
+    "@material/button" "^5.1.0"
+    "@rmwc/base" "^6.0.14"
+    "@rmwc/icon" "^6.0.14"
+    "@rmwc/provider" "^6.0.14"
+    "@rmwc/ripple" "^6.0.14"
+    "@rmwc/types" "^6.0.5"
 
 "@rmwc/card@^5.7.2":
   version "5.7.2"
