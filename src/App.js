@@ -4,7 +4,7 @@ import {IconButton} from '@rmwc/icon-button';
 import {ThemeProvider} from '@rmwc/theme';
 import {Grid, GridCell} from '@rmwc/grid';
 import {LinearProgress} from '@rmwc/linear-progress';
-import eyeson, { StreamHelpers } from 'eyeson';
+import eyeson, {StreamHelpers} from 'eyeson';
 import Toolbar from './Toolbar';
 import Video from './Video';
 import './App.css';
@@ -12,7 +12,10 @@ import './App.css';
 const ACCESS_KEY_LENGTH = 24;
 
 class App extends Component {
-  state = {local: null, stream: null, connecting: false, audio: true, video: true, screen: false};
+  state = {
+    local: null, stream: null, connecting: false, audio: true, video: true, screen: false,
+    token: '',
+  };
 
   constructor(props) {
     super(props);
@@ -21,10 +24,32 @@ class App extends Component {
     this.toggleAudio = this.toggleAudio.bind(this);
     this.toggleVideo = this.toggleVideo.bind(this);
     this.toggleScreen = this.toggleScreen.bind(this);
+    this.onTokenFieldChange = this.onTokenFieldChange.bind(this);
+    this.getTokenFromQuery = this.getTokenFromQuery.bind(this);
+
+    const token = this.getTokenFromQuery();
+    if(typeof(token) === "string") {
+      this.state.token = token;
+    }
   }
 
   componentDidMount() {
     eyeson.onEvent(this.handleEvent);
+    if(this.state.token.length === ACCESS_KEY_LENGTH) {
+      this.start();
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if(prevState.token !== this.state.token && this.state.token.length === ACCESS_KEY_LENGTH) {
+      this.start();
+    }
+  }
+
+  getTokenFromQuery() {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    return urlParams.get('token');
   }
 
   handleEvent(event) {
@@ -75,13 +100,17 @@ class App extends Component {
     }
   }
 
-  start(event) {
-    const key = event.target.value.trim();
-    if (key.length !== ACCESS_KEY_LENGTH) {
-      return;
-    }
+  start() {
+    const { token } = this.state;
     this.setState({connecting: true});
-    eyeson.start(key);
+    eyeson.start(token);
+  }
+
+  onTokenFieldChange(event) {
+    const key = event.target.value.trim();
+    this.setState({
+      token: key,
+    });
   }
 
   render() {
@@ -97,7 +126,8 @@ class App extends Component {
               <Fragment>
                 <TextField
                   label="Meeting Access Key"
-                  onChange={this.start}
+                  onChange={this.onTokenFieldChange}
+                  value={this.state.token}
                   disabled={this.state.connecting}
                 />
                 <TextFieldHelperText>
