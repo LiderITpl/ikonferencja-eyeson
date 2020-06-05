@@ -8,13 +8,19 @@ import eyeson, {StreamHelpers} from 'eyeson';
 import Toolbar from './Toolbar';
 import Video from './Video';
 import './App.css';
+import axios from 'axios';
 
 const ACCESS_KEY_LENGTH = 24;
+const API_URL_BASE = 'https://live.ikonferencja.pl/restapi/api/api.php';
 
 class App extends Component {
   state = {
-    local: null, stream: null, connecting: false, audio: true, video: true, screen: false,
-    token: '',
+    local: null, stream: null, connecting: false,
+    audio: true, video: true, screen: false, token: '',
+    extra: {
+      userName: undefined,
+      roomName: undefined,
+    }
   };
 
   constructor(props) {
@@ -26,6 +32,7 @@ class App extends Component {
     this.toggleScreen = this.toggleScreen.bind(this);
     this.onTokenFieldChange = this.onTokenFieldChange.bind(this);
     this.getTokenFromQuery = this.getTokenFromQuery.bind(this);
+    this.askServerForExtraData = this.askServerForExtraData.bind(this);
 
     const token = this.getTokenFromQuery();
     if(typeof(token) === "string") {
@@ -100,17 +107,45 @@ class App extends Component {
     }
   }
 
-  start() {
-    const { token } = this.state;
-    this.setState({connecting: true});
-    eyeson.start(token);
-  }
-
   onTokenFieldChange(event) {
     const key = event.target.value.trim();
     this.setState({
       token: key,
     });
+  }
+
+  async start() {
+    const { token } = this.state;
+    this.setState({connecting: true});
+    await this.askServerForExtraData();
+    eyeson.start(token);
+  }
+
+  async askServerForExtraData() {
+    const { token } = this.state;
+    try {
+      const response = await axios.get(`${API_URL_BASE}?token=${token}`);
+      const data = response.data;
+      if(
+          typeof(data.status) !== "string"
+          || data.status !== "OK"
+          || typeof(data.data) !== "object"
+          || !Array.isArray(data.data)
+          || typeof(data.data[0].userName) !== "string"
+          || typeof(data.data[0].roomName) !== "string"
+      ) {
+        throw new Error("Uszkodzony format danych.");
+      }
+      this.setState({
+        extra: {
+          userName: data.data[0].userName,
+          roomName: data.data[0].roomName
+        }
+      });
+    } catch(err) {
+      console.error('Nie udało się pobrać extra-danych użytkownika.');
+      console.error(err.message);
+    }
   }
 
   render() {
