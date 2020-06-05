@@ -9,6 +9,7 @@
     "@rmwc/linear-progress": "^6.0.14",
     "@rmwc/textfield": "^6.1.0",
     "@rmwc/theme": "^6.1.0",
+    "axios": "^0.19.2",
     "eyeson": "^1.5.0",
     "gh-pages": "^2.0.1",
     "lodash": "4.17.12",
